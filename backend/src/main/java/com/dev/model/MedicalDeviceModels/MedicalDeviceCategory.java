@@ -1,4 +1,4 @@
-package com.dev.model;
+package com.dev.model.MedicalDeviceModels;
 
 import jakarta.persistence.*;
 
@@ -16,8 +16,7 @@ public class MedicalDeviceCategory {
     @Column(nullable = true, unique = true)
     private String description;
 
-    public MedicalDeviceCategory()
-    {}
+    public MedicalDeviceCategory(){}
 
     // Getters et Setters (obligatoires pour JPA)
     public Long getId() { return category_id; }

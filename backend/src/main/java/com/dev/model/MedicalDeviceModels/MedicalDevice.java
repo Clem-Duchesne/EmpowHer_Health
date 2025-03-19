@@ -1,7 +1,5 @@
-package com.dev.model;
-
+package com.dev.model.MedicalDeviceModels;
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity

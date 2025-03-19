@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MainApplication<Empowher_health>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dev.MainApplication",
+            "projectName": "Empowher_health",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
