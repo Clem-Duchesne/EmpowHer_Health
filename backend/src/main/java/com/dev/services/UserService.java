@@ -3,21 +3,21 @@ package com.dev.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.dev.controller.RequiredArgsConstructor;
 import com.dev.model.UserModels.User;
 import com.dev.repository.UserRepository;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public List<User> getUsers()
     {
@@ -29,8 +29,24 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public boolean verifyLogin(String email, String password) {
+        // Find user by email
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        
+        // Check if user exists
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            
+            // Compare the password with the stored hash
+            return passwordEncoder.matches(password, user.getPassword());
+        }
+        
+        return false;  // User not found
+    }
+
     public User createUser(User user)
     {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

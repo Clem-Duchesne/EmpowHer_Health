@@ -1,19 +1,15 @@
 package com.dev.model.UserModels;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.dev.model.PatientModels.Patient;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient", referencedColumnName = "id")
-    private Patient patient;
 
     @Column(name="email", nullable = false)
     private String email;
@@ -24,11 +20,11 @@ public class User {
     @ElementCollection
     @CollectionTable(
         name = "user_roles",  // This is the table where roles will be stored
-        joinColumns = @JoinColumn(name = "user_id")  // Foreign key to the User entity
+        joinColumns = @JoinColumn(name = "id")
     )
-    @Column(name = "role")  // Column name in the 'user_roles' table
-    private List<String> userRoles;
-
+    @Column(name = "role", nullable = true)  // Column name in the 'user_roles' table
+    private List<String> userRoles = new ArrayList<>();
+    
     public User(){}
 
     public User(String email, String password){

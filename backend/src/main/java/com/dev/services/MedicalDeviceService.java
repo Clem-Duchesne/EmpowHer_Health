@@ -3,21 +3,16 @@ package com.dev.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dev.controller.RequiredArgsConstructor;
 import com.dev.model.MedicalDeviceModels.MedicalDevice;
 import com.dev.repository.MedicalDeviceRepository;
 
 @Service
-@RequiredArgsConstructor
 public class MedicalDeviceService{
-
-        private final MedicalDeviceRepository medicalDeviceRepository;
-
-        public MedicalDeviceService(MedicalDeviceRepository deviceRepository) {
-            this.medicalDeviceRepository = deviceRepository;
-        }
+        @Autowired
+        private MedicalDeviceRepository medicalDeviceRepository;
 
         public MedicalDevice CreateMedicalDevice(MedicalDevice medicalDevice) {
             return medicalDeviceRepository.save(medicalDevice);

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
-function Login()
+function Subscribe()
 {
     // State for email and password
     const [email, setEmail] = useState('');
@@ -24,10 +24,12 @@ function Login()
     // Make API call to login 
     try {
       // Make API call to your backend
-      const response = await axios.post('http://localhost:8080/users', {
+      const userData = {
         email: email,
-        password: password,
-      });
+        password: password
+    };
+
+      const response = await axios.post('http://localhost:8080/users', userData);
 
       // Assuming the response contains user data or a token, handle the response
       console.log('Login Successful:', response.data);
@@ -47,7 +49,7 @@ function Login()
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h2>Subscribe</h2>
             <form onSubmit={handleSubmit}>
                 {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
 
@@ -75,11 +77,11 @@ function Login()
                 />
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit">Subscribe</button>
             </form>
         </div>
     );
-
+ 
 }
 
-export default Login
+export default Subscribe
