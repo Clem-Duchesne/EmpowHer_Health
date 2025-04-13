@@ -48,38 +48,46 @@ function Subscribe()
   };
 
     return (
-        <div className="login-container">
-            <h2>Subscribe</h2>
-            <form onSubmit={handleSubmit}>
-                {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-
-                <div className="input-group">
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                />
-                </div>
-
-                <div className="input-group">
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    required
-                />
-                </div>
-
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
+      <img
+          src="/assets/logo.png"
+          alt="EmpowHer Health Logo"
+          className="mx-auto mb-6"
+        />
+        <h2 className="text-2xl font-bold mb-6 text-center text-empowher-dark-blue">Subscribe</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="text"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-empowher-blue"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700">Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-empowher-blue"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white bg-empowher-blue rounded hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+            >
+              Subscribe
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     );
  
 }

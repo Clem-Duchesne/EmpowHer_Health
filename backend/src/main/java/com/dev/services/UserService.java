@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.dev.model.UserModels.User;
 import com.dev.repository.UserRepository;
 
@@ -31,17 +30,15 @@ public class UserService {
 
     public boolean verifyLogin(String email, String password) {
         // Find user by email
-        Optional<User> userOpt = userRepository.findByEmail(email);
+        try{
+            User user = userRepository.findByEmail(email);
         
-        // Check if user exists
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            
             // Compare the password with the stored hash
             return passwordEncoder.matches(password, user.getPassword());
         }
-        
-        return false;  // User not found
+        catch(Exception e){
+            return false;  // User not found
+        }
     }
 
     public User createUser(User user)
@@ -59,4 +56,11 @@ public class UserService {
             return false;
         }
     }
+
+    public User replaceUser(User user)
+    {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 }
+
